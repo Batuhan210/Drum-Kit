@@ -1,20 +1,26 @@
-/* we select just first button! - it's gonna give us to an alert when i click the button
- let selectButton = document.querySelector("button");
-selectButton.addEventListener("click", handleClick);    // need to 2 parameters
-*/
 // get the length of drum buttons
-let numberOfDrumButtons = document.querySelectorAll(".drum").length;
 
+// DETECTING BUTTON PRESS
+let numberOfDrumButtons = document.querySelectorAll(".drum").length;
 for (let i = 0; i < numberOfDrumButtons; i++) {
     document.querySelectorAll(".drum")[i].addEventListener("click", handleClick);  // this function is anonim function
 }
-
-// to audio play
-function handleClick() {
+ function handleClick() {
     let buttonInnerHTML = this.innerHTML;
-    this.style.color = "black";    // change the text color, when clicked the button
+    this.style.color = "black";    // change the text color, when click the button
 
-    switch(buttonInnerHTML) {
+    makeSound(buttonInnerHTML);
+ }
+ 
+
+// DETECTING KEYBORAD PRESS
+document.addEventListener("keypress", function(event) {
+    makeSound(event.key);
+});
+
+function makeSound(key) {
+
+    switch(key) {
         case "w":
             let tom1 = new Audio("sounds/tom-1.mp3");
             tom1.play();
@@ -50,7 +56,6 @@ function handleClick() {
             kick.play();
             break;
 
-        default:
-            console.log(buttonInnerHTML);
+        default: console.log(key);
     }
-}
+ } 
