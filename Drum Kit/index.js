@@ -5,17 +5,24 @@ let numberOfDrumButtons = document.querySelectorAll(".drum").length;
 for (let i = 0; i < numberOfDrumButtons; i++) {
     document.querySelectorAll(".drum")[i].addEventListener("click", handleClick);  // this function is anonim function
 }
+
  function handleClick() {
     let buttonInnerHTML = this.innerHTML;
     this.style.color = "black";    // change the text color, when click the button
 
     makeSound(buttonInnerHTML);
+
+    buttonAnimation(buttonInnerHTML);    // onna add the animation to buttons. When we click the button,
  }
  
 
 // DETECTING KEYBORAD PRESS
 document.addEventListener("keypress", function(event) {
+    
     makeSound(event.key);
+
+    buttonAnimation(event.key);            // gonna add the animation to buttons. When we press the key on keyboard,
+    
 });
 
 function makeSound(key) {
@@ -58,4 +65,15 @@ function makeSound(key) {
 
         default: console.log(key);
     }
- } 
+ }
+
+// ADD ANIMATION TO BUTTONS 
+function buttonAnımation(currentKey) {
+    let activeButton = document.querySelector("." + currentKey);
+    activeButton.classList.add("pressed");
+
+  // remove the class after 1 seconds
+    setTimeout(function() {
+        activeButton.classList.remove("pressed");
+    }, 100);
+}
